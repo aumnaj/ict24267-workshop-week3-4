@@ -109,7 +109,7 @@ body {
 
 /* ─── SIDEBAR ─── */
 .sidebar {
-  width: 260px; flex-shrink: 0;
+  width: 240px; flex-shrink: 0;
   background: var(--bg2); border-right: 1px solid var(--border);
   padding: 24px 0; position: sticky; top: 57px;
   height: calc(100vh - 57px); overflow-y: auto;
@@ -136,7 +136,7 @@ body {
 .sidebar-dot.w4 { background: var(--w4); }
 
 /* ─── CONTENT ─── */
-.content { flex: 1; min-width: 0; padding: 40px 48px; max-width: 900px; }
+.content { flex: 1; min-width: 0; padding: 40px 36px; max-width: 1100px; }
 
 /* ─── WEEK HEADER ─── */
 .week-header {
@@ -315,6 +315,7 @@ body {
 
 /* ─── CODE BLOCK ─── */
 .code-wrap { margin: 16px 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+.code-wrap.wide { margin-left: -36px; margin-right: -36px; border-radius: 0; border-left: none; border-right: none; }
 .code-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 10px 16px; font-size: 11px; font-family: var(--font-en);
@@ -443,11 +444,12 @@ code { font-family: var(--font-code); }
 }
 
 /* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .sidebar { display: none; }
   .content { padding: 24px 20px; }
   .compare-grid { grid-template-columns: 1fr; }
   .summary-grid { grid-template-columns: 1fr; }
+  .code-wrap.wide { margin-left: 0; margin-right: 0; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
 }
 </style>
 </head>
@@ -1329,9 +1331,391 @@ ID: {feedback_id}"""</span>
       <div class="step w4-step">
         <div class="step-num w4">4</div>
         <div class="step-content">
-          <p><strong style="color:white">สร้างไฟล์ index.html</strong> บนเครื่องตัวเอง</p>
-          <div class="callout warn" style="margin-top:8px"><span class="callout-icon">⚠️</span><span class="callout-text">ในไฟล์ index.html แทนที่ <code>YOUR_SUBMIT_URL</code> และ <code>YOUR_GET_URL</code> ด้วย Function URL จริงจาก LAB 3-5 ก่อน upload</span></div>
-          <p style="color:var(--muted);font-size:0.85rem;margin-top:8px">ไฟล์ HTML พร้อม code ครบถ้วนอยู่ใน LAB Manual ฉบับเต็ม (ICT24267_LAB_Manual_Complete.md) หัวข้อ LAB 4-4</p>
+          <p><strong style="color:white">สร้างไฟล์ index.html</strong> บนเครื่องตัวเอง — Copy code ด้านล่างทั้งหมดไปวางในไฟล์ใหม่ชื่อ <code style="color:var(--w4)">index.html</code></p>
+          <div class="callout warn" style="margin-top:10px;margin-bottom:10px"><span class="callout-icon">⚠️</span><span class="callout-text">แทนที่ <code>YOUR_SUBMIT_URL</code> และ <code>YOUR_GET_URL</code> บรรทัดที่ 2-3 ด้วย Function URL จริงจาก LAB 3-5 ก่อน upload ขึ้น S3</span></div>
+          <div class="code-wrap wide" style="margin-top:4px">
+            <div class="code-header" style="background:rgba(255,107,53,0.15);color:#ff9966;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;font-size:11px;font-family:var(--font-en);font-weight:700;letter-spacing:0.05em;text-transform:uppercase">
+              <span style="display:flex;align-items:center;gap:10px"><div class="code-dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>index.html — ICT Feedback System Frontend</span>
+              <span>HTML / CSS / JavaScript</span>
+            </div>
+<pre><code><span class="kw">&lt;!DOCTYPE html&gt;</span>
+<span class="kw">&lt;html</span> lang=<span class="str">"th"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;head&gt;</span>
+<span class="kw">&lt;meta</span> charset=<span class="str">"UTF-8"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;meta</span> name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1.0"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;title&gt;</span>ICT Feedback System<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;script&gt;</span>
+  <span class="cm">// ✏️ แทนที่ด้วย Function URL จริงจาก LAB 3-5</span>
+  <span class="kw">const</span> SUBMIT_URL = <span class="str">"YOUR_SUBMIT_URL"</span>;
+  <span class="kw">const</span> GET_URL    = <span class="str">"YOUR_GET_URL"</span>;
+<span class="kw">&lt;/script&gt;</span>
+<span class="kw">&lt;link</span> href=<span class="str">"https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&amp;display=swap"</span> rel=<span class="str">"stylesheet"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;style&gt;</span>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: <span class="str">'Sarabun'</span>, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    min-height: 100vh;
+  }
+  .navbar {
+    background: rgba(13,17,23,0.95);
+    border-bottom: 1px solid rgba(0,212,170,0.2);
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 12px;
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+  .navbar-logo {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, #00d4aa, #00a87e);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .navbar-title {
+    font-size: 1.05rem; font-weight: 700; color: white;
+  }
+  .navbar-sub {
+    font-size: 0.78rem; color: #8b949e; margin-left: 4px;
+  }
+  .container { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
+  .section-title {
+    font-size: 1rem; font-weight: 700; color: #00d4aa;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::before {
+    content: ''; width: 3px; height: 18px;
+    background: #00d4aa; border-radius: 2px;
+  }
+  /* ── FORM CARD ── */
+  .form-card {
+    background: #161b22;
+    border: 1px solid rgba(0,212,170,0.2);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 0.85rem; font-weight: 600; color: #8b949e; }
+  input, select, textarea {
+    background: #0d1117;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #e6edf3;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #00d4aa;
+    box-shadow: 0 0 0 3px rgba(0,212,170,0.1);
+  }
+  textarea { resize: vertical; min-height: 90px; }
+  select option { background: #161b22; }
+  .star-row { display: flex; gap: 8px; margin-top: 2px; }
+  .star-btn {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #8b949e; font-size: 18px;
+    cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .star-btn:hover, .star-btn.active {
+    background: rgba(251,191,36,0.15);
+    border-color: rgba(251,191,36,0.4);
+    color: #fbbf24;
+    transform: scale(1.05);
+  }
+  .btn-submit {
+    width: 100%; padding: 13px;
+    background: linear-gradient(135deg, #00d4aa, #00a87e);
+    border: none; border-radius: 10px;
+    color: #0d1117; font-family: 'Sarabun', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .btn-submit:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  /* ── ALERT ── */
+  .alert {
+    padding: 12px 16px; border-radius: 10px;
+    font-size: 0.9rem; margin-top: 14px; display: none;
+  }
+  .alert.success {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #86efac;
+  }
+  .alert.error {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5;
+  }
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 16px; align-items: center;
+  }
+  .filter-bar select, .filter-bar input {
+    width: auto; flex: 1; min-width: 140px; max-width: 200px;
+  }
+  .btn-filter {
+    padding: 10px 20px; border-radius: 8px;
+    background: rgba(0,212,170,0.1);
+    border: 1px solid rgba(0,212,170,0.3);
+    color: #00d4aa; font-family: 'Sarabun', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .btn-filter:hover { background: rgba(0,212,170,0.2); }
+  /* ── FEEDBACK LIST ── */
+  .feedback-list { display: flex; flex-direction: column; gap: 12px; }
+  .feedback-card {
+    background: #161b22;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: border-color 0.2s;
+  }
+  .feedback-card:hover { border-color: rgba(0,212,170,0.2); }
+  .fc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .fc-name { font-weight: 700; color: white; font-size: 0.95rem; }
+  .fc-course {
+    font-size: 0.78rem; font-weight: 600;
+    background: rgba(0,212,170,0.12);
+    border: 1px solid rgba(0,212,170,0.25);
+    color: #00d4aa; padding: 2px 10px; border-radius: 99px;
+  }
+  .fc-stars { color: #fbbf24; font-size: 1rem; letter-spacing: 1px; }
+  .fc-comment { color: #8b949e; font-size: 0.9rem; line-height: 1.6; }
+  .fc-time { font-size: 0.75rem; color: #484f58; margin-top: 8px; }
+  .empty-state {
+    text-align: center; padding: 48px 20px;
+    color: #484f58; font-size: 0.95rem;
+  }
+  .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+  .loading {
+    text-align: center; padding: 32px;
+    color: #8b949e; font-size: 0.9rem;
+  }
+  .stat-row {
+    display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .stat-box {
+    flex: 1; min-width: 120px;
+    background: #161b22;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 14px 16px;
+    text-align: center;
+  }
+  .stat-box .num {
+    font-size: 1.6rem; font-weight: 800;
+    color: #00d4aa; font-family: monospace; line-height: 1;
+  }
+  .stat-box .lbl { font-size: 0.78rem; color: #8b949e; margin-top: 4px; }
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .filter-bar select, .filter-bar input { max-width: 100%; }
+  }
+<span class="kw">&lt;/style&gt;</span>
+<span class="kw">&lt;/head&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+
+<span class="kw">&lt;nav</span> class=<span class="str">"navbar"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;div</span> class=<span class="str">"navbar-logo"</span><span class="kw">&gt;</span>💬<span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;div&gt;</span>
+    <span class="kw">&lt;div</span> class=<span class="str">"navbar-title"</span><span class="kw">&gt;</span>ICT Feedback System<span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;span</span> class=<span class="str">"navbar-sub"</span><span class="kw">&gt;</span>ICT24267 Cloud Computing — AWS Serverless Workshop<span class="kw">&lt;/span&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/nav&gt;</span>
+
+<span class="kw">&lt;div</span> class=<span class="str">"container"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- ── FORM ── --&gt;</span>
+  <span class="kw">&lt;div</span> class=<span class="str">"section-title"</span><span class="kw">&gt;</span>📝 ส่ง Feedback<span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;div</span> class=<span class="str">"form-card"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;div</span> class=<span class="str">"form-row"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;div</span> class=<span class="str">"form-group"</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;label&gt;</span>ชื่อ-นามสกุล *<span class="kw">&lt;/label&gt;</span>
+        <span class="kw">&lt;input</span> type=<span class="str">"text"</span> id=<span class="str">"student_name"</span> placeholder=<span class="str">"เช่น สมชาย ใจดี"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;/div&gt;</span>
+      <span class="kw">&lt;div</span> class=<span class="str">"form-group"</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;label&gt;</span>รหัสวิชา *<span class="kw">&lt;/label&gt;</span>
+        <span class="kw">&lt;select</span> id=<span class="str">"course"</span><span class="kw">&gt;</span>
+          <span class="kw">&lt;option</span> value=<span class="str">""</span><span class="kw">&gt;</span>-- เลือกวิชา --<span class="kw">&lt;/option&gt;</span>
+          <span class="kw">&lt;option</span> value=<span class="str">"ICT24267"</span><span class="kw">&gt;</span>ICT24267 Cloud Computing<span class="kw">&lt;/option&gt;</span>
+          <span class="kw">&lt;option</span> value=<span class="str">"ICT24467"</span><span class="kw">&gt;</span>ICT24467 Data Pipeline<span class="kw">&lt;/option&gt;</span>
+          <span class="kw">&lt;option</span> value=<span class="str">"OTHER"</span><span class="kw">&gt;</span>วิชาอื่นๆ<span class="kw">&lt;/option&gt;</span>
+        <span class="kw">&lt;/select&gt;</span>
+      <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;div</span> class=<span class="str">"form-row"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;div</span> class=<span class="str">"form-group"</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;label&gt;</span>ระดับความพึงพอใจ *<span class="kw">&lt;/label&gt;</span>
+        <span class="kw">&lt;div</span> class=<span class="str">"star-row"</span> id=<span class="str">"star-row"</span><span class="kw">&gt;</span>
+          <span class="kw">&lt;button</span> class=<span class="str">"star-btn"</span> data-val=<span class="str">"1"</span> onclick=<span class="str">"setRating(1)"</span><span class="kw">&gt;</span>★<span class="kw">&lt;/button&gt;</span>
+          <span class="kw">&lt;button</span> class=<span class="str">"star-btn"</span> data-val=<span class="str">"2"</span> onclick=<span class="str">"setRating(2)"</span><span class="kw">&gt;</span>★<span class="kw">&lt;/button&gt;</span>
+          <span class="kw">&lt;button</span> class=<span class="str">"star-btn"</span> data-val=<span class="str">"3"</span> onclick=<span class="str">"setRating(3)"</span><span class="kw">&gt;</span>★<span class="kw">&lt;/button&gt;</span>
+          <span class="kw">&lt;button</span> class=<span class="str">"star-btn"</span> data-val=<span class="str">"4"</span> onclick=<span class="str">"setRating(4)"</span><span class="kw">&gt;</span>★<span class="kw">&lt;/button&gt;</span>
+          <span class="kw">&lt;button</span> class=<span class="str">"star-btn"</span> data-val=<span class="str">"5"</span> onclick=<span class="str">"setRating(5)"</span><span class="kw">&gt;</span>★<span class="kw">&lt;/button&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+      <span class="kw">&lt;/div&gt;</span>
+      <span class="kw">&lt;div</span> class=<span class="str">"form-group"</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;label&gt;</span>ชื่ออาจารย์ผู้สอน<span class="kw">&lt;/label&gt;</span>
+        <span class="kw">&lt;input</span> type=<span class="str">"text"</span> id=<span class="str">"instructor"</span> placeholder=<span class="str">"เช่น อ.อำนาจ คงเจริญถิ่น"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;div</span> class=<span class="str">"form-row"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;div</span> class=<span class="str">"form-group full"</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;label&gt;</span>ความคิดเห็น / ข้อเสนอแนะ<span class="kw">&lt;/label&gt;</span>
+        <span class="kw">&lt;textarea</span> id=<span class="str">"comment"</span> placeholder=<span class="str">"แสดงความคิดเห็นเกี่ยวกับการเรียนการสอน..."</span><span class="kw">&gt;&lt;/textarea&gt;</span>
+      <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;button</span> class=<span class="str">"btn-submit"</span> id=<span class="str">"btn-submit"</span> onclick=<span class="str">"submitFeedback()"</span><span class="kw">&gt;</span>
+      ส่ง Feedback 🚀
+    <span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;div</span> class=<span class="str">"alert"</span> id=<span class="str">"alert-box"</span><span class="kw">&gt;&lt;/div&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+
+  <span class="cm">&lt;!-- ── FEEDBACK LIST ── --&gt;</span>
+  <span class="kw">&lt;div</span> class=<span class="str">"section-title"</span><span class="kw">&gt;</span>📋 Feedback ทั้งหมด<span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;div</span> class=<span class="str">"stat-row"</span> id=<span class="str">"stat-row"</span><span class="kw">&gt;&lt;/div&gt;</span>
+  <span class="kw">&lt;div</span> class=<span class="str">"filter-bar"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;select</span> id=<span class="str">"filter-course"</span> onchange=<span class="str">"loadFeedbacks()"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;option</span> value=<span class="str">""</span><span class="kw">&gt;</span>ทุกวิชา<span class="kw">&lt;/option&gt;</span>
+      <span class="kw">&lt;option</span> value=<span class="str">"ICT24267"</span><span class="kw">&gt;</span>ICT24267<span class="kw">&lt;/option&gt;</span>
+      <span class="kw">&lt;option</span> value=<span class="str">"ICT24467"</span><span class="kw">&gt;</span>ICT24467<span class="kw">&lt;/option&gt;</span>
+    <span class="kw">&lt;/select&gt;</span>
+    <span class="kw">&lt;select</span> id=<span class="str">"filter-rating"</span> onchange=<span class="str">"loadFeedbacks()"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;option</span> value=<span class="str">""</span><span class="kw">&gt;</span>ทุก Rating<span class="kw">&lt;/option&gt;</span>
+      <span class="kw">&lt;option</span> value=<span class="str">"5"</span><span class="kw">&gt;</span>★★★★★ (5)<span class="kw">&lt;/option&gt;</span>
+      <span class="kw">&lt;option</span> value=<span class="str">"4"</span><span class="kw">&gt;</span>★★★★☆ (4)<span class="kw">&lt;/option&gt;</span>
+      <span class="kw">&lt;option</span> value=<span class="str">"3"</span><span class="kw">&gt;</span>★★★☆☆ (3)<span class="kw">&lt;/option&gt;</span>
+    <span class="kw">&lt;/select&gt;</span>
+    <span class="kw">&lt;button</span> class=<span class="str">"btn-filter"</span> onclick=<span class="str">"loadFeedbacks()"</span><span class="kw">&gt;</span>🔄 รีเฟรช<span class="kw">&lt;/button&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;div</span> class=<span class="str">"feedback-list"</span> id=<span class="str">"feedback-list"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;div</span> class=<span class="str">"loading"</span><span class="kw">&gt;</span>⏳ กำลังโหลด...<span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+
+<span class="kw">&lt;/div&gt;</span>
+
+<span class="kw">&lt;script&gt;</span>
+  <span class="kw">let</span> selectedRating = <span class="num">0</span>;
+
+  <span class="kw">function</span> <span class="fn">setRating</span>(val) {
+    selectedRating = val;
+    document.<span class="fn">querySelectorAll</span>(<span class="str">'.star-btn'</span>).<span class="fn">forEach</span>(btn =&gt; {
+      btn.classList.<span class="fn">toggle</span>(<span class="str">'active'</span>, <span class="nb">parseInt</span>(btn.dataset.val) &lt;= val);
+    });
+  }
+
+  <span class="kw">async function</span> <span class="fn">submitFeedback</span>() {
+    <span class="kw">const</span> name    = document.<span class="fn">getElementById</span>(<span class="str">'student_name'</span>).value.<span class="fn">trim</span>();
+    <span class="kw">const</span> course  = document.<span class="fn">getElementById</span>(<span class="str">'course'</span>).value;
+    <span class="kw">const</span> comment = document.<span class="fn">getElementById</span>(<span class="str">'comment'</span>).value.<span class="fn">trim</span>();
+    <span class="kw">const</span> instructor = document.<span class="fn">getElementById</span>(<span class="str">'instructor'</span>).value.<span class="fn">trim</span>();
+    <span class="kw">const</span> btn     = document.<span class="fn">getElementById</span>(<span class="str">'btn-submit'</span>);
+    <span class="kw">const</span> alertEl = document.<span class="fn">getElementById</span>(<span class="str">'alert-box'</span>);
+
+    <span class="kw">if</span> (!name || !course || !selectedRating) {
+      <span class="fn">showAlert</span>(<span class="str">'error'</span>, <span class="str">'⚠️ กรุณากรอกชื่อ, เลือกวิชา และให้คะแนน rating ก่อนส่ง'</span>);
+      <span class="kw">return</span>;
+    }
+    btn.disabled = <span class="kw">true</span>;
+    btn.textContent = <span class="str">'⏳ กำลังส่ง...'</span>;
+    alertEl.style.display = <span class="str">'none'</span>;
+
+    <span class="kw">try</span> {
+      <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(SUBMIT_URL, {
+        method: <span class="str">'POST'</span>,
+        headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+        body: <span class="nb">JSON</span>.<span class="fn">stringify</span>({ student_name: name, course, rating: selectedRating, comment, instructor })
+      });
+      <span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+      <span class="kw">if</span> (data.status === <span class="str">'success'</span>) {
+        <span class="fn">showAlert</span>(<span class="str">'success'</span>, <span class="str">'✅ ส่ง Feedback สำเร็จ! ขอบคุณครับ'</span>);
+        document.<span class="fn">getElementById</span>(<span class="str">'student_name'</span>).value = <span class="str">''</span>;
+        document.<span class="fn">getElementById</span>(<span class="str">'course'</span>).value = <span class="str">''</span>;
+        document.<span class="fn">getElementById</span>(<span class="str">'comment'</span>).value = <span class="str">''</span>;
+        document.<span class="fn">getElementById</span>(<span class="str">'instructor'</span>).value = <span class="str">''</span>;
+        selectedRating = <span class="num">0</span>;
+        document.<span class="fn">querySelectorAll</span>(<span class="str">'.star-btn'</span>).<span class="fn">forEach</span>(b =&gt; b.classList.<span class="fn">remove</span>(<span class="str">'active'</span>));
+        <span class="fn">loadFeedbacks</span>();
+      } <span class="kw">else</span> {
+        <span class="fn">showAlert</span>(<span class="str">'error'</span>, <span class="str">'❌ Error: '</span> + (data.message || <span class="str">'ไม่สามารถส่งได้'</span>));
+      }
+    } <span class="kw">catch</span> (e) {
+      <span class="fn">showAlert</span>(<span class="str">'error'</span>, <span class="str">'❌ เชื่อมต่อ Lambda ไม่ได้ — ตรวจสอบ SUBMIT_URL และ CORS อีกครั้ง'</span>);
+    } <span class="kw">finally</span> {
+      btn.disabled = <span class="kw">false</span>;
+      btn.textContent = <span class="str">'ส่ง Feedback 🚀'</span>;
+    }
+  }
+
+  <span class="kw">function</span> <span class="fn">showAlert</span>(type, msg) {
+    <span class="kw">const</span> el = document.<span class="fn">getElementById</span>(<span class="str">'alert-box'</span>);
+    el.className = <span class="str">'alert '</span> + type;
+    el.textContent = msg;
+  }
+
+  <span class="kw">async function</span> <span class="fn">loadFeedbacks</span>() {
+    <span class="kw">const</span> listEl  = document.<span class="fn">getElementById</span>(<span class="str">'feedback-list'</span>);
+    <span class="kw">const</span> statEl  = document.<span class="fn">getElementById</span>(<span class="str">'stat-row'</span>);
+    <span class="kw">const</span> course  = document.<span class="fn">getElementById</span>(<span class="str">'filter-course'</span>).value;
+    <span class="kw">const</span> rating  = document.<span class="fn">getElementById</span>(<span class="str">'filter-rating'</span>).value;
+    listEl.innerHTML = <span class="str">'&lt;div class="loading"&gt;⏳ กำลังโหลด...&lt;/div&gt;'</span>;
+    <span class="kw">let</span> url = GET_URL;
+    <span class="kw">const</span> params = [];
+    <span class="kw">if</span> (course) params.<span class="fn">push</span>(<span class="str">'course='</span> + course);
+    <span class="kw">if</span> (rating) params.<span class="fn">push</span>(<span class="str">'rating='</span> + rating);
+    <span class="kw">if</span> (params.length) url += <span class="str">'?'</span> + params.<span class="fn">join</span>(<span class="str">'&amp;'</span>);
+    <span class="kw">try</span> {
+      <span class="kw">const</span> res  = <span class="kw">await</span> <span class="fn">fetch</span>(url);
+      <span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+      <span class="kw">const</span> items = data.data || [];
+      <span class="kw">if</span> (!items.length) {
+        listEl.innerHTML = <span class="str">'&lt;div class="empty-state"&gt;&lt;div class="icon"&gt;💬&lt;/div&gt;ยังไม่มี Feedback&lt;/div&gt;'</span>;
+        statEl.innerHTML = <span class="str">''</span>;
+        <span class="kw">return</span>;
+      }
+      <span class="kw">const</span> avg = (items.<span class="fn">reduce</span>((s, i) =&gt; s + (i.rating||<span class="num">0</span>), <span class="num">0</span>) / items.length).<span class="fn">toFixed</span>(<span class="num">1</span>);
+      <span class="kw">const</span> fiveStars = items.<span class="fn">filter</span>(i =&gt; i.rating === <span class="num">5</span>).length;
+      statEl.innerHTML = <span class="str">`
+        &lt;div class="stat-box"&gt;&lt;div class="num"&gt;${items.length}&lt;/div&gt;&lt;div class="lbl"&gt;Feedback ทั้งหมด&lt;/div&gt;&lt;/div&gt;
+        &lt;div class="stat-box"&gt;&lt;div class="num"&gt;${avg}&lt;/div&gt;&lt;div class="lbl"&gt;Rating เฉลี่ย&lt;/div&gt;&lt;/div&gt;
+        &lt;div class="stat-box"&gt;&lt;div class="num"&gt;${fiveStars}&lt;/div&gt;&lt;div class="lbl"&gt;ให้ 5 ดาว&lt;/div&gt;&lt;/div&gt;
+      `</span>;
+      listEl.innerHTML = items.<span class="fn">map</span>(fb =&gt; {
+        <span class="kw">const</span> stars = <span class="str">'★'</span>.<span class="fn">repeat</span>(fb.rating||<span class="num">0</span>) + <span class="str">'☆'</span>.<span class="fn">repeat</span>(<span class="num">5</span>-(fb.rating||<span class="num">0</span>));
+        <span class="kw">const</span> time  = fb.timestamp ? <span class="kw">new</span> <span class="fn">Date</span>(fb.timestamp).<span class="fn">toLocaleString</span>(<span class="str">'th-TH'</span>) : <span class="str">''</span>;
+        <span class="kw">const</span> instr = fb.instructor ? <span class="str">' · '</span> + fb.instructor : <span class="str">''</span>;
+        <span class="kw">return</span> <span class="str">`&lt;div class="feedback-card"&gt;
+          &lt;div class="fc-top"&gt;
+            &lt;div&gt;&lt;div class="fc-name"&gt;${fb.student_name}&lt;/div&gt;
+            &lt;span class="fc-course"&gt;${fb.course}${instr}&lt;/span&gt;&lt;/div&gt;
+            &lt;div class="fc-stars"&gt;${stars}&lt;/div&gt;
+          &lt;/div&gt;
+          ${fb.comment ? <span class="str">`&lt;div class="fc-comment"&gt;${fb.comment}&lt;/div&gt;`</span> : <span class="str">''</span>}
+          &lt;div class="fc-time"&gt;${time}&lt;/div&gt;
+        &lt;/div&gt;`</span>
+      }).<span class="fn">join</span>(<span class="str">''</span>);
+    } <span class="kw">catch</span> (e) {
+      listEl.innerHTML = <span class="str">'&lt;div class="empty-state"&gt;❌ โหลดข้อมูลไม่ได้ — ตรวจสอบ GET_URL และ CORS&lt;/div&gt;'</span>;
+    }
+  }
+
+  <span class="fn">loadFeedbacks</span>();
+<span class="kw">&lt;/script&gt;</span>
+<span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre>
+          </div>
         </div>
       </div>
       <div class="step w4-step"><div class="step-num w4">5</div><div class="step-content"><p><strong style="color:white">Upload ไฟล์</strong>: S3 → เปิด bucket → <span class="val val-orange">Upload</span> → Add files → เลือก <span class="val val-yellow">index.html</span> → <span class="val val-orange">Upload</span></p></div></div>
